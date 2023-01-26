@@ -1,82 +1,85 @@
 package com.driver;
-
 import java.util.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Pizza {
 
-    private int price = 0;
-    private int extraToppingPrice = 0;
+    private int price = 0 ;
     private Boolean isVeg;
-    private String bill = "";
+    private String bill="";
 
-    Map<String,Integer> map = new LinkedHashMap<>();
-    //List<String> list = Main.getList();
+    private int cheese = 80;
+    private int toppings = 0;
 
+
+    private boolean isExtraToppingsAdded;
+    private boolean isExtraCheeseAdded;
+    private boolean isExtraTakeawayAdded;
+    private boolean isBillGenerated;
 
     public Pizza(Boolean isVeg){
         this.isVeg = isVeg;
         // your code goes here
-        if(isVeg) setPrice(300);
-        else setPrice(400);
-
+        if(isVeg){
+            this.price = 300;
+        }
+        else{
+            this.price = 400;
+        }
+        bill += "Base Price Of The Pizza: "+this.price+"\n";
     }
 
     public int getPrice(){
         return this.price;
     }
-    public void setPrice(int price){
-        this.price += price;
-        map.put("Base Price Of The Pizza: ",this.price);
-    }
-
 
     public void addExtraCheese(){
         // your code goes here
-        if(map.containsKey("Extra Cheese Added: ")==false){
-            map.put("Extra Cheese Added : ",80);
-            price += 80;
+        if(!isExtraCheeseAdded){
+            this.price += 80;
+            isExtraCheeseAdded = true;
         }
-    }
-    public void setExtraCheesePrice(){
-        map.put("Extra Cheese Added: ",0);
     }
 
     public void addExtraToppings(){
         // your code goes here
         if(isVeg){
-            extraToppingPrice = 70;
+            toppings = 70;
         }
         else{
-            extraToppingPrice = 120;
+            toppings = 120;
         }
-        if(map.containsKey("Extra Toppings Added: ")==false){
-            map.put("Extra Toppings Added : ",extraToppingPrice);
-            price += extraToppingPrice;
+        if(!isExtraToppingsAdded){
+            this.price += toppings;
+            isExtraToppingsAdded = true;
         }
-    }
-    public void setExtraToppingPrice(){
-        map.put("Extra Toppings Added: ",0);
     }
 
     public void addTakeaway(){
         // your code goes here
-        if(map.containsKey("Paperbag Added: ")==false){
-            map.put("Paperbag Added: ",20);
+        if(!isExtraTakeawayAdded){
+            isExtraTakeawayAdded = true;
             this.price += 20;
         }
     }
 
     public String getBill(){
         // your code goes here
-        map.put("Total Price: ",this.price);
+        if(!isBillGenerated){
+            isBillGenerated = true;
 
-        for(String s : map.keySet()){
-            if(map.get(s) != 0){
-                bill += s + String.valueOf(map.get(s)) + "\n";
+            if(isExtraCheeseAdded){
+                bill += "Extra Cheese Added: "+cheese+"\n";
             }
+            if(isExtraToppingsAdded){
+                bill += "Extra Toppings Added: "+toppings+"\n";
+            }
+            if(isExtraTakeawayAdded){
+                bill += "Paperbag Added: "+"20\n";
+            }
+            bill += "Total Price: "+this.price+"\n";
         }
-
         return this.bill;
     }
 }
