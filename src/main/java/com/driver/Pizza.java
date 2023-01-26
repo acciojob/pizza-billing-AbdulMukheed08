@@ -62,7 +62,7 @@ public class Pizza {
     public void addTakeaway(){
         // your code goes here
         this.price += 20;
-        map.put("Paperbag Added: ",map.getOrDefault("Paperbag Added: ",0)+20);
+        map.put("Paperbag Added: ",20);
     }
 
     public String getBill(){
