@@ -61,8 +61,10 @@ public class Pizza {
 
     public void addTakeaway(){
         // your code goes here
-        this.price += 20;
-        map.put("Paperbag Added: ",20);
+        if(map.containsKey("Paperbag Added: ")==false){
+            map.put("Paperbag Added: ",20);
+            this.price += 20;
+        }
     }
 
     public String getBill(){
